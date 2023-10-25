@@ -28,7 +28,6 @@ const HomeGraph = () => {
   return (
     <ScrollView>
       <View>
-        <Text>dsdsds</Text>
         <Text>{data}</Text>
       </View>
     </ScrollView>

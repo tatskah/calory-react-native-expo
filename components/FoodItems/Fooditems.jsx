@@ -1,4 +1,4 @@
-import { View, Text, ScrollView, Button, useColorScheme, FlatList } from "react-native";
+import { View, Text, ScrollView, Button, useColorScheme, FlatList, TouchableOpacity } from "react-native";
 
 import styles from "./fooditems.style";
 import { useState, useEffect } from "react";
@@ -6,8 +6,9 @@ import { Stack, useRouter } from "expo-router";
 
 import FoodItemsService from "../../services/fooditems.service";
 import FoodItem from "../FoodItem/FoodItem";
+import FoodItemForm from "../FoodItemForm/FoodItemForm";
 
-const FoodItems = () => {
+const FoodItems = ({ navigation }) => {
     const router = useRouter();
     const colorScheme = useColorScheme();
     const [data, setData] = useState([]);
@@ -18,7 +19,7 @@ const FoodItems = () => {
     }, []);
 
     const handleClick = (name) => {
-        alert(name);
+        alert("ljkjklj");
     }
 
     const getData = async () => {
@@ -37,22 +38,32 @@ const FoodItems = () => {
         }
     };
 
+    const renderItem = ({ item }) => (
+        <View style={styles.listItem}>
+            <FoodItem handleClick={handleClick} navigation={navigation} key={`item-${item.id}`} item={item} />
+        </View>
+    );
+
     return (
-        <ScrollView style={{ backgroundColor: "#FFF" }}>
-            <View>
-                {/* <Button title="Toggle Toast" onPress={() => showToast()} /> */}
-
-                <Text style={{ fontSize: 16, textAlign: "center", padding: 2, backgroundColor: "#3DDC84" }}>Ruoka-aineet</Text>
-
-                {data?.map((item, index) => (
-
-                    <FoodItem handleClick={handleClick} key={`item-${item.id}`} item={item} />
-
-                ))}
-
-
+        <View style={styles.container}>
+            <View style={styles.appHeader}>
+                <Text style={styles.appHeaderText}>Ruoka-aineet</Text>
             </View>
-        </ScrollView >
+
+            <View style={styles.container}>
+                <FlatList
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
+
+            {/* <ScrollView style={styles.content}>
+                {data?.map((item, index) => (
+                    <FoodItem handleClick={handleClick} key={`item-${item.id}`} item={item} />
+                ))}
+            </ScrollView > */}
+        </View>
     );
 };
 export default FoodItems;

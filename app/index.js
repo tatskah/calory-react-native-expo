@@ -1,8 +1,10 @@
-import { View, ScrollView, SafeAreaView, Text } from "react-native";
+import { View, ScrollView, SafeAreaView, Text, Image, } from "react-native";
 import { useState, useEffect } from "react";
 import { Stack, useRouter } from "expo-router";
-import { FoodCalendar, FoodItems, HomePage, Report,HomeGraph, FoodItemForm } from '../components';
-import * as Font from 'expo-font';
+import { FoodCalendar, FoodItems, HomePage, Report, HomeGraph, FoodItemForm } from '../components';
+
+import { icons, SIZES } from '../constants';
+import styles from '../styles';
 
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { NavigationContainer } from "@react-navigation/native";
@@ -15,11 +17,11 @@ const Index = () => {
     const [currentDate, setCurrentDate] = useState('');
     const router = useRouter();
 
-    const loadFonts = async () => {
-        await Font.loadAsync({
-            MaterialCommunityIcons: MaterialCommunityIcons
-        });
-    };
+    // const loadFonts = async () => {
+    //     await Font.loadAsync({
+    //         MaterialCommunityIcons: MaterialCommunityIcons
+    //     });
+    // };
 
     useEffect(() => {
         var date = new Date().getDate(); //Current Date
@@ -33,50 +35,55 @@ const Index = () => {
 
 
     return (
-        <View style={{ flex:1 , backgroundColor:"#F4F4F4"}}>
-            <Stack.Screen options={{ headerTitle: "KALORI" }}>
-                
-                
-            </Stack.Screen>
+
+        <View style={{ flex: 1, backgroundColor: "#F4F4F4" }}>
+            <Stack.Screen options={{ headerTitle: "KALORI" }} />
 
             <NavigationContainer independent={true}>
-                <Tab.Navigator 
-                    activeColor="#8B0711" 
-                    inactiveColor="#085B08"
-                    barStyle={{ backgroundColor: '#E1F6EB' }}
+                <Tab.Navigator
+                    activeColor={styles.tab_navi_bottom.activeColor}
+                    inactiveColor={styles.tab_navi_bottom.inactiveColor}
+                    barStyle={{ backgroundColor: styles.tab_navi_bottom.backgroundColor }}
 
-                    >
-                    <Tab.Screen name='Home' component={HomeGraph}
+                >
+                    <Tab.Screen name='HomeGraph' component={HomeGraph}
                         options={{
-                            tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name='home' color={color} size={26} />
+                            tabBarIcon: () => (
+                                <Image source={icons.home} style={styles.toolbar_bottom_icon} />
                             )
                         }}
                     />
                     <Tab.Screen name='FoodCalendar' component={FoodCalendar}
                         options={{
                             tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name='calendar-month-outline' color={color} size={26} />
+                                <Image source={icons.food2} style={styles.toolbar_bottom_icon} />
                             )
                         }}
                     />
                     <Tab.Screen name='FoodItems' component={FoodItems}
                         options={{
                             tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name='food-fork-drink' color={color} size={26} />
+                                <Image source={icons.food1} style={styles.toolbar_bottom_icon} />
                             )
                         }}
                     />
-                    <Tab.Screen name='Report' component={FoodItemForm}
+                    {/* <Tab.Screen name='FoodItemForm' component={FoodItemForm}
                         options={{
                             tabBarIcon: ({ color, size }) => (
-                                <MaterialCommunityIcons name='nas' color={color} size={26} />
+                                <Image source={icons.report} style={styles.toolbar_bottom_icon} />
+                            )
+                        }}
+                    /> */}
+                    <Tab.Screen name='Report' component={Report}
+                        options={{
+                            tabBarIcon: ({ color, size }) => (
+                                <Image source={icons.report} style={styles.toolbar_bottom_icon} />
                             )
                         }}
                     />
                 </Tab.Navigator>
             </NavigationContainer>
-        
+
         </View>
 
     );

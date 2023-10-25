@@ -7,45 +7,42 @@ const styles = StyleSheet.create({
         alignItems: "baseline",
         flexDirection: "column",
         padding: 4,
-        marginLeft: 4,
-        marginRight: 4,
-        marginTop:4,
-        borderColor:"#CCCCCC",
-        borderWidth:1,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 4,
+        borderColor: "#CCCCCC",
+        borderWidth: 1,
         borderRadius: 4,
         backgroundColor: "#FFFFFF",
         shadowColor: "#CCCCCC",
-        shadowRadius:10,
+        shadowRadius: 4,
     },
-    item: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        margin: 10,
-        height: 100, // Adjust the height as needed
-        borderWidth: 1,
-        borderColor: '#ccc',
-      },
     name: {
         flex: 1,
-        fontWeight:"bold"
+        fontWeight: "bold"
     },
     calrow: {
-        paddingTop:8,
+        paddingTop: 8,
         flex: 1,
         justifyContent: "space-between",
-        flexDirection:"row",
+        flexDirection: "row",
     },
     calrowitem: {
         flex: 1,
         minWidth: 90,
-        
+
     },
     separator: {
         height: 1,
         backgroundColor: 'lightgray',
-        width:300,
-    
-      },
+        width: "100%",
+
+    },
+    item_title:{
+        borderBottomWidth:1,
+        borderBottomColor:"#CCC",
+        borderBottomRightRadius:10,
+        width:"100%"
+    }
 });
 export default styles;
