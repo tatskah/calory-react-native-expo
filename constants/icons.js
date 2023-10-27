@@ -6,7 +6,7 @@ import delete2 from '../assets/icons/delete2.png';
 import food1 from '../assets/icons/food-1.png';
 import food2 from '../assets/icons/food-2.png';
 import report from '../assets/icons/report.png';
-
+import search from '../assets/icons/search.png';
 export default {
     home,
     new_item,
@@ -15,5 +15,6 @@ export default {
     food1,
     food2,
     caltime,
-    report
+    report,
+    search
 }

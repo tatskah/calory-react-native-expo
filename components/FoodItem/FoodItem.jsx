@@ -11,17 +11,18 @@ import {
 import { useRouter } from "expo-router";
 import styles from "./fooditem.style";
 
-const FoodItem = ({ item, navigation, handleClick }) => {
-    
-    useEffect(()=>{
-        
-    },[]);
+const FoodItem = ({ item, navigation }) => {
+    const [data, setData] = useState(item);
+
+    useEffect(() => {
+        // setData(item);
+    }, []);
 
     return (
 
         <View>
             <TouchableOpacity
-                onPress={() => navigation.navigate('FoodItemForm', { item: item })}
+                onPress={() => navigation.navigate('FoodItemForm', { id: item.id })}
                 style={styles.container}
             >
                 <View style={styles.item_title}>

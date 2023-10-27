@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-
+import { SIZES } from '../../constants'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -25,10 +25,12 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   appHeader: {
+    flex: 1,
+    flexDirection: "row",
     backgroundColor: '#1F6702',
     height: 50,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     position: 'absolute',
     top: 0,
     left: 0,
@@ -37,15 +39,48 @@ const styles = StyleSheet.create({
   },
   appHeaderText: {
     fontSize: 18,
-    textAlign: "center",
+    textAlign: "left",
     padding: 8,
     color: "#98FF6F",
     backgroundColor: "#1F6702"
   },
   content: {
+    flex: 1,
     padding: 0,
     paddingTop: 40,
+
+  },
+  searchInput: {
+    height: SIZES.search_icon,
+    borderRadius: 4,
+    backgroundColor: "#98FF6F",
+    color:"#FFF"
+  },
+  search_icon: {
+    width: SIZES.search_icon,
+    height: SIZES.search_icon,
+    marginRight:4,
+
+  },
+  empty_list_content:{
+    justifyContent:"center", 
+    backgroundColor:"#1F6702",
+    shadowColor: "#98FF6F",
+    borderColor:"#98FF6F",
+    shadowRadius:4,
+    width:300,
+    height:100,
+    borderWidth:2,
+    marginTop:"50%",
+    borderRadius:12,
+  },
+  empty_text:{
+    alignSelf:"center",
+    color: "#98FF6F",
+    fontSize:28,
+    textAlign:"center",
     
   },
+
 });
 export default styles;

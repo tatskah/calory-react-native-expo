@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
+import FoodItemsService from "../../services/fooditems.service";
 
 import styles from './fooditemform.style';
 
+
 const FoodItemForm = ({ route, navigation }) => {
-    const { item } = route.params;
+    const { id } = route.params;
 
     const [name, setName] = useState('');
     const [kcal, setKcal] = useState('');
@@ -25,32 +27,74 @@ const FoodItemForm = ({ route, navigation }) => {
     }
 
     useEffect(() => {
-        setName(item.name);
-        setKcal(item.kcal);
-        setKj(item.kj);
-        setFat(item.fat);
-        setProtein(item.protein);
-        setCarbohydrate(item.carbohydrate);
-    }, []);
+        getData();
+    })
 
-    const deleteItem = () => {
-        console.log("DELETE " + name);
+    const getData = async () => {
+        // setIsLoading(true);
 
-        //TODO save data
+        try {
+            const { data } = await FoodItemsService.getFoodItemsById(id);
+
+            if (data.id) {
+                setName(data.name);
+                setKcal(data.kcal);
+                setKj(data.kj);
+                setFat(data.fat);
+                setProtein(data.protein);
+                setCarbohydrate(data.carbohydrate);
+            } else {
+                clearData();
+            }
+
+            // setIsLoading(false);
+        } catch (error) {
+            // setError(error);
+            clearData();
+            console.log(error);
+        } finally {
+            // setIsLoading(false);
+        }
+    };
+
+    function clearData() {
+        const [name, setName] = useState('');
+        const [kcal, setKcal] = useState('');
+        const [kj, setKj] = useState('');
+        const [fat, setFat] = useState('');
+        const [protein, setProtein] = useState('');
+        const [carbohydrate, setCarbohydrate] = useState('');
+    }
+
+    const deleteItem = async () => {
+        try {
+            const del = await FoodItemsService.deleteById(id);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            navigation.navigate('FoodItems');
+        }
+    }
+
+    const updateItem = () => {
+        console.log("UPDATE " + name);
+
     }
 
     return (
         <View style={styles.container}>
             <View style={styles.appHeader}>
-                <Text style={styles.appHeaderText}>Ruoka-aines</Text>
+                <Text style={styles.appHeaderText}>Aines</Text>
             </View>
             <View style={styles.content}>
+
                 <Text style={styles.title}>Nimi:</Text>
                 <TextInput style={styles.input}
                     value={name}
                     // placeholder='Name'
                     onChangeText={(text) => setName(text)}
                 />
+
                 <Text style={styles.title}>Kcal:</Text>
                 <TextInput style={styles.input}
                     value={kcal}
@@ -58,6 +102,7 @@ const FoodItemForm = ({ route, navigation }) => {
                     onChangeText={(text) => setKcal(text)}
                     keyboardType='decimal-pad'
                 />
+
                 <Text style={styles.title}>Kj:</Text>
                 <TextInput style={styles.input}
                     value={kj}
@@ -65,6 +110,7 @@ const FoodItemForm = ({ route, navigation }) => {
                     onChangeText={(text) => setKj(text)}
                     keyboardType='decimal-pad'
                 />
+
                 <Text style={styles.title}>Rasva:</Text>
                 <TextInput style={styles.input}
                     value={fat}
@@ -72,6 +118,7 @@ const FoodItemForm = ({ route, navigation }) => {
                     onChangeText={(text) => setFat(text)}
                     keyboardType='decimal-pad'
                 />
+
                 <Text style={styles.title}>Proteiini:</Text>
                 <TextInput style={styles.input}
                     value={protein}
@@ -79,6 +126,7 @@ const FoodItemForm = ({ route, navigation }) => {
                     onChangeText={(text) => setProtein(text)}
                     keyboardType='decimal-pad'
                 />
+
                 <Text style={styles.title}>Hiilihydraatti:</Text>
                 <TextInput style={styles.input}
                     value={carbohydrate}
@@ -86,11 +134,11 @@ const FoodItemForm = ({ route, navigation }) => {
                     onChangeText={(text) => setCarbohydrate(text)}
                     keyboardType='decimal-pad'
                 />
+
                 <View style={styles.buttobContainer}>
                     <TouchableOpacity
                         style={styles.buttonRed}
                         onPress={() => navigation.navigate('FoodItems')}
-
                     >
                         <Text style={styles.buttonText}>Takaisin</Text>
                     </TouchableOpacity>
@@ -98,7 +146,6 @@ const FoodItemForm = ({ route, navigation }) => {
                     <TouchableOpacity
                         style={styles.button}
                         onPress={deleteItem}
-
                     >
                         <Text style={styles.buttonText}>Poista</Text>
                     </TouchableOpacity>

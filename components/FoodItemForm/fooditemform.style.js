@@ -61,10 +61,12 @@ const styles = StyleSheet.create({
         alignSelf: "flex-end"
     },
     appHeader: {
+        flex:1,
         backgroundColor: '#1F6702',
         height: 50,
-        alignItems: 'center',
+        alignItems: 'flex-start',
         justifyContent: 'center',
+        alignSelf:"flex-start",
         position: 'absolute',
         top: 0,
         left: 0,
