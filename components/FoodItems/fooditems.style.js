@@ -52,14 +52,24 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     height: SIZES.search_icon,
+    width:200,
     borderRadius: 4,
     backgroundColor: "#98FF6F",
-    color:"#FFF"
+    color:"#FFF",
+
   },
   search_icon: {
     width: SIZES.search_icon,
     height: SIZES.search_icon,
-    marginRight:4,
+    marginRight:2,
+    marginLeft:12
+
+  },
+  new_icon: {
+    width: SIZES.search_icon,
+    height: SIZES.search_icon,
+    marginRight:12,
+    marginLeft:2
 
   },
   empty_list_content:{

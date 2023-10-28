@@ -3,17 +3,19 @@ import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
 import FoodItemsService from "../../services/fooditems.service";
 
 import styles from './fooditemform.style';
+import { CheckBox } from 'react-native-elements';
 
 
 const FoodItemForm = ({ route, navigation }) => {
     const { id } = route.params;
-
     const [name, setName] = useState('');
     const [kcal, setKcal] = useState('');
     const [kj, setKj] = useState('');
     const [fat, setFat] = useState('');
     const [protein, setProtein] = useState('');
     const [carbohydrate, setCarbohydrate] = useState('');
+    const [favorite, setFavorite] = useState(false);
+    const [missingDataMsg, setMissingDataMsg] = useState('');
 
     const handleSave = () => {
         console.log("name " + name);
@@ -27,12 +29,15 @@ const FoodItemForm = ({ route, navigation }) => {
     }
 
     useEffect(() => {
-        getData();
-    })
+        const unsubscribe = navigation.addListener('focus', () => {
+            setMissingDataMsg('');
+            getData();
+        });
+        return unsubscribe;
+    });
 
     const getData = async () => {
         // setIsLoading(true);
-
         try {
             const { data } = await FoodItemsService.getFoodItemsById(id);
 
@@ -43,6 +48,7 @@ const FoodItemForm = ({ route, navigation }) => {
                 setFat(data.fat);
                 setProtein(data.protein);
                 setCarbohydrate(data.carbohydrate);
+                setFavorite(data.favorite);
             } else {
                 clearData();
             }
@@ -58,12 +64,13 @@ const FoodItemForm = ({ route, navigation }) => {
     };
 
     function clearData() {
-        const [name, setName] = useState('');
-        const [kcal, setKcal] = useState('');
-        const [kj, setKj] = useState('');
-        const [fat, setFat] = useState('');
-        const [protein, setProtein] = useState('');
-        const [carbohydrate, setCarbohydrate] = useState('');
+        setName('')
+        setKcal(0);
+        setKj(0);
+        setFat(0);
+        setProtein(0);
+        setCarbohydrate(0);
+        setFavorite(false);
     }
 
     const deleteItem = async () => {
@@ -76,9 +83,57 @@ const FoodItemForm = ({ route, navigation }) => {
         }
     }
 
-    const updateItem = () => {
-        console.log("UPDATE " + name);
+    const updateItem = async () => {
+        const data = {
+            name: name,
+            kcal: kcal,
+            kj: kj,
+            fat: fat,
+            protein: protein,
+            carbohydrate: carbohydrate,
+            favorite: favorite
+        }
+        // console.log("update "+ JSON.stringify(data));
+        try {
+            if (name.length > 3) {
+                const del = await FoodItemsService.updateFoodItem(id, data);
+            } else {
+                setMissingDataMsg('Nimen pituus pitää olla yli 3 merkkiä');
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            if (name.length > 3) {
+                navigation.navigate('FoodItems');
+            }
+        }
+    }
 
+    const createItem = async () => {
+        const data = {
+            name: name,
+            kcal: kcal,
+            kj: kj,
+            fat: fat,
+            protein: protein,
+            carbohydrate: carbohydrate,
+            favorite: favorite
+        }
+        // console.log("update "+ JSON.stringify(data));
+        try {
+            if (name.length > 3) {
+                const newItem = await FoodItemsService.saveFoodItem(data);
+            } else {
+                setMissingDataMsg('Nimen pituus pitää olla yli 3 merkkiä');
+            }
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            if (name.length > 3) {
+                navigation.navigate('FoodItems');
+            }
+        }
     }
 
     return (
@@ -88,7 +143,10 @@ const FoodItemForm = ({ route, navigation }) => {
             </View>
             <View style={styles.content}>
 
-                <Text style={styles.title}>Nimi:</Text>
+                <Text style={styles.title}>Nimi:
+                    <Text style={styles.nameError}>{missingDataMsg}</Text>
+                </Text>
+
                 <TextInput style={styles.input}
                     value={name}
                     // placeholder='Name'
@@ -135,6 +193,16 @@ const FoodItemForm = ({ route, navigation }) => {
                     keyboardType='decimal-pad'
                 />
 
+                <View style={styles.checkboxContainer}>
+                    <CheckBox
+                        style={styles.checkbox}
+                        checked={favorite}
+                        onValueChange={setFavorite}
+                        onPress={() => setFavorite(!favorite)}
+                    />
+                    <Text style={styles.checkboLabel}>Suosikki</Text>
+                </View>
+
                 <View style={styles.buttobContainer}>
                     <TouchableOpacity
                         style={styles.buttonRed}
@@ -152,10 +220,11 @@ const FoodItemForm = ({ route, navigation }) => {
 
                     <TouchableOpacity
                         style={styles.button}
-                        onPress={handleSave}
+                        onPress={id > 0 ? updateItem : createItem}
                     >
                         <Text style={styles.buttonText}>Tallenna</Text>
                     </TouchableOpacity>
+
                 </View>
             </View>
         </View>

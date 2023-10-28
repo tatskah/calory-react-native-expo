@@ -17,6 +17,25 @@ const styles = StyleSheet.create({
         shadowColor: "#CCCCCC",
         shadowRadius: 4,
     },
+    containerFavorite: {
+        flex: 1,
+        justifyContent: "space-between",
+        alignItems: "baseline",
+        flexDirection: "column",
+        padding: 4,
+        marginLeft: 0,
+        marginRight: 0,
+        marginTop: 4,
+        borderColor: "#CCCCCC",
+        borderWidth: 1,
+        borderRadius: 4,
+        backgroundColor: "#FFFFFF",
+        borderLeftWidth:8,
+        borderLeftColor:"#FF5733",
+        
+        shadowColor: "#CCCCCC",
+        shadowRadius: 4,
+    },
     name: {
         flex: 1,
         fontWeight: "bold"
@@ -29,7 +48,7 @@ const styles = StyleSheet.create({
     },
     calrowitem: {
         flex: 1,
-        minWidth: 90,
+        minWidth: 110,
 
     },
     separator: {

@@ -1,45 +1,78 @@
 import React, { useEffect, useState } from 'react'
-import { View, Text, TextInput, TouchableOpacity, Image, FlatList } from 'react-native'
-import { useRouter } from 'expo-router'
+import { View, Text, FlatList } from 'react-native'
+import FoodCalendarService from '../../services/foodcalendar.service';
+import CalendarItem from '../CalendarItem/CalendarItem';
 
-import styles from "./foodcalendar.style";
+import styles from './foodcalendar.style';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const FoodCalendar = () => {
-    const [foodCalendar, setFoodCalendar] = useState([]);
+    const [foodCalendarData, setFoodCalendarData] = useState([]);
     const [foodData, setFoodData] = useState({
-        date: null,
-        items: {
-            name: '',
-            piece: 0,
-            gram: 0,
-            kcal: 0,
-            kj: 0,
-            fat: 0,
-            protein: 0,
-            carbohydrate: 0
-        }
+        add_date: null,
+        kcal_sum: 0,
+        kj_sum: 0,
+        fat_sum: 0,
+        protein_sum: 0,
+        carbohydrate_sum: 0,
+        CalendarItems: []
     })
+
 
     useEffect(() => {
         getData();
+    }, []);
 
-    });
+    const getData = async () => {
+        // setIsLoading(true);
 
-    const getData = () => {
-        prt("ÖLKÖLKÖLK");
+        try {
+            const resp = await FoodCalendarService.getFoodCalendarItems();
+            setFoodCalendarData(resp.data);
+            // setIsLoading(false);
+        } catch (error) {
+            // setError(error);
+            console.log(error);
+        } finally {
+            // setIsLoading(false);
+        }
     };
 
 
-    function prt(msg){
+    function prt(msg) {
         console.log(msg);
     }
 
-    return (
-        <View>
-
-
-
+    const renderItem = ({ item }) => (
+        <View key={`item-${item.id}`} style={styles.listItem}>
+            <CalendarItem navigation={navigation} key={`item-${item.id}`} item={item} />
         </View>
+    );
+
+    return (
+        <SafeAreaView>
+            <View style={styles.container}>
+
+                <View style={styles.appHeader}>
+                    <Text style={styles.appHeaderText}>Kalenteri</Text>
+                </View>
+
+                <View style={styles.content}>
+                    <FlatList
+                        data={foodCalendarData}
+                        renderItem={renderItem}
+                        keyExtractor={(item) => item.id}
+                        ListEmptyComponent={() => (!foodCalendarData.length ?
+                            <View style={styles.empty_list_content}>
+                                <Text style={styles.empty_text}>Ei tietueita!</Text>
+                            </View>
+                            : null)}
+                    />
+                </View>
+
+            </View>
+        </SafeAreaView>
+
     );
 
 

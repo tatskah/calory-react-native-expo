@@ -1,4 +1,4 @@
-import { View, Text, useColorScheme, FlatList, Image, Pressable } from "react-native";
+import { View, Text, FlatList, Image, Pressable } from "react-native";
 
 import styles from "./fooditems.style";
 import { useState, useEffect } from "react";
@@ -9,27 +9,29 @@ import FoodItem from "../FoodItem/FoodItem";
 import { icons } from "../../constants";
 import { TextInput } from "react-native-paper";
 
+import { createStackNavigator } from '@react-navigation/stack';
+
 const FoodItems = ({ navigation }) => {
     const router = useRouter();
-    const colorScheme = useColorScheme();
+
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
 
+    const Stack = createStackNavigator();
+
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            console.log("1");
             getData();
         });
         return unsubscribe;
     }, [navigation]);
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('blur', () => {
-            console.log("2");
-            getData();
-        });
-        return unsubscribe;
-    }, [navigation]);
+    // useEffect(() => {
+    //     const unsubscribe = navigation.addListener('blur', () => {
+    //         //getData();
+    //     });
+    //     return unsubscribe;
+    // }, [navigation]);
 
     const getData = async () => {
         // setIsLoading(true);
@@ -76,7 +78,12 @@ const FoodItems = ({ navigation }) => {
 
                     />
                 </Pressable>
-
+                <Pressable onPress={() => navigation.navigate('FoodItemForm', {id:0})}>
+                    <Image
+                        source={icons.new_item2}
+                        style={styles.new_icon}
+                    />
+                </Pressable>
 
             </View>
 

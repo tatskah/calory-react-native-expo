@@ -20,6 +20,14 @@ const Index = () => {
 
     const Tab = createBottomTabNavigator();
 
+    function HomeStackGroup(){
+        return (
+            <View></View>
+
+        );
+    }
+
+
 
     const [currentDate, setCurrentDate] = useState('');
     const router = useRouter();
@@ -40,14 +48,14 @@ const Index = () => {
         <View style={{ flex: 1, backgroundColor: "#DDD" }}>
             <Stack.Screen options={{
                 headerTitle: "KALORI",
-                backgroundColor:"#98FF6F",
-                height:20
+                backgroundColor: "#98FF6F",
+                height: 20
             }}
             />
 
             <NavigationContainer independent={true}>
                 <Tab.Navigator
-                    initialRouteName="FoodItems"
+                    initialRouteName="FoodCalendar"
                     screenOptions={({ route }) => ({
                         headerShown: false,
                         tabBarStyle: {
@@ -65,7 +73,7 @@ const Index = () => {
                         }
                     })}
                 >
-                    <Tab.Screen name='HomeGraph' component={HomeGraph}
+                    <Tab.Screen name='Home' component={HomeGraph}
                         options={{
                             tabBarLabel: 'Home',
                             tabBarIcon: () => (
@@ -89,20 +97,17 @@ const Index = () => {
                             )
                         }}
                     />
-                    <Tab.Screen name='FoodItemForm' component={FoodItemForm}
+                    <Tab.Screen name='FoodItemForm' component={FoodItemForm} 
                         options={{
+                            
                             tabBarLabel: "Edit",
-                            params: {
-                                item: []
-                            },
-                            // tabBarButton: null,
-                            // tabBarVisible: false,
-                            // tabBarShowLabel: false,
-                            // tabBarLabel:"Item",
+                            tabBarVisible: false,
+                            tabBarShowLabel: false,
                             tabBarIcon: ({ color, size }) => (
                                 <Image source={icons.report} style={styles.toolbar_bottom_icon} />
                             )
                         }}
+
                     />
                     <Tab.Screen name='Report' component={Report}
                         options={{

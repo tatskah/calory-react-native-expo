@@ -18,6 +18,13 @@ const styles = StyleSheet.create({
         alignSelf: "flex-start",
         marginBottom: 2
     },
+    nameError: {
+        fontSize:12,
+        marginLeft:20,
+        color: "red",
+        alignSelf: "flex-start",
+        marginBottom: 2
+    },
     input: {
         width: '100%',
         height: 40,
@@ -27,6 +34,27 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderRadius: 4,
         backgroundColor: "#F9F9F9"
+    },
+    checkboxContainer:{
+        flex:1,
+        marginTop:10,
+        alignItems:"center",
+        flexDirection:"row",
+        maxHeight:24,
+        maxWidth:100,
+        borderWidth:0,
+        
+    },
+
+    checkbox:{
+        marginRight:0,
+        alignSelf: 'flex-start',
+        // paddinBottom:20,
+        
+    },
+    checkboLabel:{
+        margin:8,
+        width:60
     },
     buttobContainer: {
         flex: 1,

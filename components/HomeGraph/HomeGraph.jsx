@@ -26,11 +26,15 @@ const HomeGraph = () => {
   };
 
   return (
-    <ScrollView>
-      <View>
-        <Text>{data}</Text>
-      </View>
-    </ScrollView>
+
+    <View style={styles.container}>
+                  <View style={styles.appHeader}>
+                <Text style={styles.appHeaderText}>Etusivu</Text>
+            </View>
+
+
+    </View>
+
   );
 };
 export default HomeGraph;

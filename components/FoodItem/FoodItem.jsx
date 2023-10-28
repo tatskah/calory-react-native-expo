@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { ListItem } from 'react-native-elements'
 import {
     View,
     Text,
-    TextInput,
     TouchableOpacity,
-    Image,
-    FlatList,
 } from "react-native";
-import { useRouter } from "expo-router";
 import styles from "./fooditem.style";
 
 const FoodItem = ({ item, navigation }) => {
@@ -23,7 +18,7 @@ const FoodItem = ({ item, navigation }) => {
         <View>
             <TouchableOpacity
                 onPress={() => navigation.navigate('FoodItemForm', { id: item.id })}
-                style={styles.container}
+                style={item.favorite ? styles.containerFavorite : styles.container}
             >
                 <View style={styles.item_title}>
                     <Text styles={styles.name}>{item.name} </Text>

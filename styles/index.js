@@ -14,7 +14,7 @@ const styles = {
         inactiveColor:"#98FF6F",
         backgroundColor: '#1F6702'
     }
-
+    
 
 }
 export default styles;
