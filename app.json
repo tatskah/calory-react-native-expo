@@ -8,6 +8,9 @@
       "expo-router"
     ],
     "name": "calories",
-    "slug": "calories"
+    "slug": "calories",
+    "android": {
+      "package": "tatsi.calories"
+    }
   }
 }

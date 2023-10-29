@@ -1,4 +1,4 @@
-import { View, Text, FlatList, Image, Pressable } from "react-native";
+import { View, Text, FlatList, Image, Pressable, ActivityIndicator } from "react-native";
 
 import styles from "./fooditems.style";
 import { useState, useEffect } from "react";
@@ -16,7 +16,7 @@ const FoodItems = ({ navigation }) => {
 
     const [data, setData] = useState([]);
     const [search, setSearch] = useState('');
-
+    const [isLoading, setIsLoading] = useState('');
     const Stack = createStackNavigator();
 
     useEffect(() => {
@@ -34,7 +34,7 @@ const FoodItems = ({ navigation }) => {
     // }, [navigation]);
 
     const getData = async () => {
-        // setIsLoading(true);
+        setIsLoading(true);
         let resp = null;
         try {
             if (search) {
@@ -44,14 +44,21 @@ const FoodItems = ({ navigation }) => {
             }
             setData(resp.data);
             // console.log(resp.data);
-            // setIsLoading(false);
+            setIsLoading(false);
         } catch (error) {
             // setError(error);
             console.log(error);
         } finally {
-            // setIsLoading(false);
+            setIsLoading(false);
         }
     };
+
+    const indicator = () => (
+        <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <ActivityIndicator size={"large"} />
+        </View>
+    )
+
 
     const renderItem = ({ item }) => (
         <View style={styles.listItem}>
@@ -60,7 +67,17 @@ const FoodItems = ({ navigation }) => {
     );
 
     return (
+
+
         <View style={styles.container}>
+            {isLoading ?
+                <View style={{marginTop:50, height: 40, zIndex: 1 }}>
+                    <Text style={{color:"#1F6702"}}>Ladataan...</Text>
+                    <ActivityIndicator size="large" color="#1F6702" />
+                </View>
+
+                : <View/>
+            }
 
             <View style={styles.appHeader}>
                 <Text style={styles.appHeaderText}>Ainekset</Text>
@@ -78,7 +95,7 @@ const FoodItems = ({ navigation }) => {
 
                     />
                 </Pressable>
-                <Pressable onPress={() => navigation.navigate('FoodItemForm', {id:0})}>
+                <Pressable onPress={() => navigation.navigate('FoodItemForm', { id: 0 })}>
                     <Image
                         source={icons.new_item2}
                         style={styles.new_icon}
@@ -92,6 +109,7 @@ const FoodItems = ({ navigation }) => {
                     data={data}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id}
+                    showsVerticalScrollIndicator={false}
                     ListEmptyComponent={() => (!data.length ?
                         <View style={styles.empty_list_content}>
                             <Text style={styles.empty_text}>Ei tietueita!</Text>

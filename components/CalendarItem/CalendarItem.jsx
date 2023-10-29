@@ -34,6 +34,7 @@ const CalendarItem = ({ item, navigation }) => {
                      color="#98FF6F"
                      unfilledColor="#20AF61"
                      borderColor="#1F6702"
+                     
                      />
                 </View>
 

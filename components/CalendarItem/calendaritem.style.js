@@ -7,7 +7,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "baseline",
         flexDirection: "column",
-        padding: 4,
+        padding: 12,
         marginLeft: 0,
         marginRight: 0,
         marginTop: 4,

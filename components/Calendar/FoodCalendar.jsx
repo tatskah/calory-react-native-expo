@@ -50,7 +50,6 @@ const FoodCalendar = () => {
     );
 
     return (
-        <SafeAreaView>
             <View style={styles.container}>
 
                 <View style={styles.appHeader}>
@@ -58,7 +57,11 @@ const FoodCalendar = () => {
                 </View>
 
                 <View style={styles.content}>
+                    
                     <FlatList
+                    scrollToOverflowEnabled={true}
+                        scrollEnabled={true}
+                        showsVerticalScrollIndicator={false}
                         data={foodCalendarData}
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id}
@@ -67,11 +70,12 @@ const FoodCalendar = () => {
                                 <Text style={styles.empty_text}>Ei tietueita!</Text>
                             </View>
                             : null)}
+                        
                     />
+
                 </View>
 
             </View>
-        </SafeAreaView>
 
     );
 
