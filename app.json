@@ -11,6 +11,14 @@
     "slug": "calories",
     "android": {
       "package": "tatsi.calories"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "aede6559-7ead-4214-abc3-6f90b8b26d59"
+      }
     }
   }
 }

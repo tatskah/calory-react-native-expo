@@ -8,7 +8,7 @@ import food1 from '../assets/icons/food-1.png';
 import food2 from '../assets/icons/food-2.png';
 import report from '../assets/icons/report.png';
 import search from '../assets/icons/search.png';
-
+import settings from '../assets/icons/settings.png';
 
 export default {
     home,
@@ -20,5 +20,7 @@ export default {
     food2,
     caltime,
     report,
-    search
+    search,
+    settings,
+    
 }

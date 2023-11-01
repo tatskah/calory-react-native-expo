@@ -5,6 +5,7 @@ import Report from "./Report/Report";
 import HomePage from "./HomePage/HomePage";
 import HomeGraph from "./HomeGraph/HomeGraph";
 import FoodItemForm from "./FoodItemForm/FoodItemForm";
+import Settings from "./Settings/SettingsForm";
 
 export {
   FoodCalendar,
@@ -14,5 +15,6 @@ export {
   HomePage,
   HomeGraph,
   FoodItemForm,
-
+  Settings,
+  
 };

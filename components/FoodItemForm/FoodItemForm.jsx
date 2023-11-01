@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity } from 'react-native';
 import FoodItemsService from "../../services/fooditems.service";
-
+import CheckBox from 'expo-checkbox';
 import styles from './fooditemform.style';
-import { CheckBox } from 'react-native-elements';
-
 
 const FoodItemForm = ({ route, navigation }) => {
     const { id } = route.params;
@@ -40,7 +38,7 @@ const FoodItemForm = ({ route, navigation }) => {
         // setIsLoading(true);
         try {
             const { data } = await FoodItemsService.getFoodItemsById(id);
-
+            
             if (data.id) {
                 setName(data.name);
                 setKcal(data.kcal);
@@ -65,11 +63,11 @@ const FoodItemForm = ({ route, navigation }) => {
 
     function clearData() {
         setName('')
-        setKcal(0);
-        setKj(0);
-        setFat(0);
-        setProtein(0);
-        setCarbohydrate(0);
+        setKcal('0');
+        setKj('0');
+        setFat('0');
+        setProtein('0');
+        setCarbohydrate('0');
         setFavorite(false);
     }
 
@@ -155,55 +153,58 @@ const FoodItemForm = ({ route, navigation }) => {
 
                 <Text style={styles.title}>Kcal:</Text>
                 <TextInput style={styles.input}
-                    value={kcal}
+                    value={kcal.toString()}
                     // placeholder='Kcal'
+                    
                     onChangeText={(text) => setKcal(text)}
-                    keyboardType='decimal-pad'
+                    inputMode='decimal-pad'
                 />
 
                 <Text style={styles.title}>Kj:</Text>
                 <TextInput style={styles.input}
-                    value={kj}
+                    value={kj.toString()}
                     // placeholder='Kj'
                     onChangeText={(text) => setKj(text)}
-                    keyboardType='decimal-pad'
-                />
+                    inputMode='decimal-pad'                />
 
                 <Text style={styles.title}>Rasva:</Text>
                 <TextInput style={styles.input}
-                    value={fat}
+                    value={fat.toString()}
                     // placeholder='Rasva'
                     onChangeText={(text) => setFat(text)}
-                    keyboardType='decimal-pad'
-                />
+                    inputMode='decimal-pad'                />
 
                 <Text style={styles.title}>Proteiini:</Text>
                 <TextInput style={styles.input}
-                    value={protein}
+                    value={protein.toString()}
                     // placeholder='Proteiini'
                     onChangeText={(text) => setProtein(text)}
-                    keyboardType='decimal-pad'
-                />
+                    inputMode='decimal-pad'                />
 
                 <Text style={styles.title}>Hiilihydraatti:</Text>
                 <TextInput style={styles.input}
-                    value={carbohydrate}
+                    value={carbohydrate.toString()}
                     // placeholder='Hiilihydraatti'
                     onChangeText={(text) => setCarbohydrate(text)}
-                    keyboardType='decimal-pad'
-                />
+                    inputMode='decimal-pad'                />
 
                 <View style={styles.checkboxContainer}>
                     <CheckBox
                         style={styles.checkbox}
-                        checked={favorite}
+                        aria-checked={favorite}
                         onValueChange={setFavorite}
                         onPress={() => setFavorite(!favorite)}
+                        color={favorite ? '#1F6702' : undefined}
+
                     />
-                    <Text style={styles.checkboLabel}>Suosikki</Text>
+                    <TouchableOpacity
+                        onPress={() => setFavorite(!favorite)}
+                    >
+                        <Text style={styles.checkboxLabel}>Suosikki</Text>
+                    </TouchableOpacity>
                 </View>
 
-                <View style={styles.buttobContainer}>
+                <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         style={styles.buttonRed}
                         onPress={() => navigation.navigate('FoodItems')}
@@ -212,14 +213,14 @@ const FoodItemForm = ({ route, navigation }) => {
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.buttonGreen}
                         onPress={deleteItem}
                     >
                         <Text style={styles.buttonText}>Poista</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={styles.button}
+                        style={styles.buttonGreen}
                         onPress={id > 0 ? updateItem : createItem}
                     >
                         <Text style={styles.buttonText}>Tallenna</Text>

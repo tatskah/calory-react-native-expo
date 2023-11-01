@@ -4,27 +4,37 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'flex-start',
-        flexDirection:"column",
+        flexDirection: "column",
         alignItems: 'center',
         padding: 20,
         backgroundColor: "#F5FFF1"
     },
-    mainTitle: {
-        alignSelf: "center",
-        marginBottom: 2,
-        fontSize: 22,
-        fontWeight: "bold"
+    appHeader: {
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: '#1F6702',
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 1,
     },
-    title: {
-        alignSelf: "flex-start",
-        marginBottom: 2
+    appHeaderText: {
+        fontSize: 18,
+        textAlign: "left",
+        padding: 8,
+        color: "#98FF6F",
+        backgroundColor: "#1F6702"
     },
-    nameError: {
-        fontSize:12,
-        marginLeft:20,
-        color: "red",
-        alignSelf: "flex-start",
-        marginBottom: 2
+    content: {
+        alignContent: "center",
+        justifyContent: "center",
+        width: "100%",
+        padding: 0,
+        paddingTop: 54,
     },
     input: {
         width: '100%',
@@ -35,23 +45,6 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         borderRadius: 4,
         backgroundColor: "#F9F9F9"
-    },
-    checkboxContainer:{
-        marginTop:0,
-        alignItems:"center",
-        flexDirection:"row",
-        maxHeight:54,
-        maxWidth:100,
-        borderWidth:0,
-        
-    },
-
-    checkbox:{
-        
-    },
-    checkboxLabel:{
-        margin:4,
-        width:60
     },
     buttonContainer: {
         flex: 1,
@@ -89,33 +82,6 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 16,
         textAlign: 'center',
-    },
-    appHeader: {
-        flex:1,
-        backgroundColor: '#1F6702',
-        height: 50,
-        alignItems: 'flex-start',
-        justifyContent: 'center',
-        alignSelf:"flex-start",
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1,
-    },
-    appHeaderText: {
-        fontSize: 18,
-        textAlign: "center",
-        padding: 8,
-        color: "#98FF6F",
-        backgroundColor: "#1F6702"
-    },
-    content: {
-        alignContent: "center",
-        justifyContent: "center",
-        width: "100%",
-        padding: 0,
-        paddingTop: 54,
     },
 })
 export default styles;

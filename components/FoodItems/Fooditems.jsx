@@ -24,6 +24,13 @@ const FoodItems = ({ navigation }) => {
             getData();
         });
         return unsubscribe;
+    }, []);
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            getData();
+        });
+        return unsubscribe;
     }, [navigation]);
 
     // useEffect(() => {
@@ -71,7 +78,7 @@ const FoodItems = ({ navigation }) => {
 
         <View style={styles.container}>
             {isLoading ?
-                <View style={{marginTop:50, height: 40, zIndex: 1 }}>
+                <View style={{marginTop:50, height: 20, zIndex: 1 }}>
                     <Text style={{color:"#1F6702"}}>Ladataan...</Text>
                     <ActivityIndicator size="large" color="#1F6702" />
                 </View>
@@ -117,12 +124,7 @@ const FoodItems = ({ navigation }) => {
                         : null)}
                 />
             </View>
-
-            {/* <ScrollView style={styles.content}>
-                {data?.map((item, index) => (
-                    <FoodItem handleClick={handleClick} key={`item-${item.id}`} item={item} />
-                ))}
-            </ScrollView > */}
+            
         </View>
     );
 };

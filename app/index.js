@@ -1,36 +1,35 @@
-import { View, ScrollView, SafeAreaView, Text, Image, } from "react-native";
+import { View, Image, } from "react-native";
 import { useState, useEffect } from "react";
-import { Stack, useRouter } from "expo-router";
-import { FoodCalendar, FoodItems, HomePage, Report, HomeGraph, FoodItemForm } from '../components';
-
-import { icons, SIZES } from '../constants';
+import { Stack, useRouter, useNavigation } from "expo-router";
+import { FoodCalendar, FoodItems, Report, HomeGraph, FoodItemForm, Settings } from '../components';
+import { icons } from '../constants';
 import styles from '../styles';
 
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { NavigationContainer } from "@react-navigation/native";
-// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 
 const Index = () => {
-
-
-    const Tab = createBottomTabNavigator();
-
-    function HomeStackGroup(){
-        return (
-            <View></View>
-
-        );
-    }
-
-
-
     const [currentDate, setCurrentDate] = useState('');
     const router = useRouter();
+    const navigation = useNavigation();
+    const Tab = createBottomTabNavigator();
+    const HomeStack = createNativeStackNavigator();
+
+    // const tabNav = Tab.Navigator(router, {
+    //     hiddenTabs: ['FoodItemForm']
+    //     });
+
+    // function HomeStack(){
+    //     return (
+    //         <Stack.Navigator>
+    //             <Stack.Screen   name='FoodItemForm' component={FoodItemForm}></Stack.Screen> 
+
+    //         </Stack.Navigator>
+
+    //     );
+    // }
 
     useEffect(() => {
         var date = new Date().getDate(); //Current Date
@@ -48,8 +47,7 @@ const Index = () => {
         <View style={{ flex: 1, backgroundColor: "#DDD" }}>
             <Stack.Screen options={{
                 headerTitle: "KALORI",
-                backgroundColor: "#98FF6F",
-                height: 20
+                height: 20,
             }}
             />
 
@@ -99,10 +97,8 @@ const Index = () => {
                     />
                     <Tab.Screen name='FoodItemForm' component={FoodItemForm} 
                         options={{
-                            
-                            tabBarLabel: "Edit",
-                            tabBarVisible: false,
-                            tabBarShowLabel: false,
+                            tabBarButton: () => null,
+                            tabBarVisible:false,
                             tabBarIcon: ({ color, size }) => (
                                 <Image source={icons.report} style={styles.toolbar_bottom_icon} />
                             )
@@ -111,12 +107,22 @@ const Index = () => {
                     />
                     <Tab.Screen name='Report' component={Report}
                         options={{
-                            tabBarLabel: "Report",
+                            tabBarLabel: "Raportti",
                             tabBarIcon: () => (
                                 <Image source={icons.report} style={styles.toolbar_bottom_icon} />
                             )
                         }}
                     />
+                    <Tab.Screen name="Settings" component={Settings}
+                        options={{
+                            tabBarLabel: "Asetukset",
+                            tabBarIcon: () => (
+                                <Image source={icons.settings} style={styles.toolbar_bottom_icon} />
+                            )
+                        }}
+
+                    />
+
                 </Tab.Navigator>
             </NavigationContainer>
 

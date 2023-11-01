@@ -6,7 +6,7 @@ import CalendarItem from '../CalendarItem/CalendarItem';
 import styles from './foodcalendar.style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const FoodCalendar = () => {
+const FoodCalendar = (navigation) => {
     const [foodCalendarData, setFoodCalendarData] = useState([]);
     const [foodData, setFoodData] = useState({
         add_date: null,
@@ -49,33 +49,38 @@ const FoodCalendar = () => {
         </View>
     );
 
+    const itemSeparator = () => {
+        return <View style={{height:2, backgroundColor:"#1F6702", marginTop:1}} />
+    };
+
     return (
-            <View style={styles.container}>
+        <View style={styles.container}>
 
-                <View style={styles.appHeader}>
-                    <Text style={styles.appHeaderText}>Kalenteri</Text>
-                </View>
+            <View style={styles.appHeader}>
+                <Text style={styles.appHeaderText}>Kalenteri</Text>
+            </View>
 
-                <View style={styles.content}>
-                    
-                    <FlatList
+            <View style={styles.content}>
+
+                <FlatList
                     scrollToOverflowEnabled={true}
-                        scrollEnabled={true}
-                        showsVerticalScrollIndicator={false}
-                        data={foodCalendarData}
-                        renderItem={renderItem}
-                        keyExtractor={(item) => item.id}
-                        ListEmptyComponent={() => (!foodCalendarData.length ?
-                            <View style={styles.empty_list_content}>
-                                <Text style={styles.empty_text}>Ei tietueita!</Text>
-                            </View>
-                            : null)}
+                    scrollEnabled={true}
+                    showsVerticalScrollIndicator={false}
+                    ItemSeparatorComponent={itemSeparator}
+                    data={foodCalendarData}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id}
+                    ListEmptyComponent={() => (!foodCalendarData.length ?
+                        <View style={styles.empty_list_content}>
+                            <Text style={styles.empty_text}>Ei tietueita!</Text>
+                        </View>
+                        : null)}
                         
-                    />
-
-                </View>
+                />
 
             </View>
+
+        </View>
 
     );
 
