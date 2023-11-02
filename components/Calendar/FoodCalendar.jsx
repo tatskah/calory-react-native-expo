@@ -44,13 +44,13 @@ const FoodCalendar = (navigation) => {
     }
 
     const renderItem = ({ item }) => (
-        <View key={`item-${item.id}`} style={styles.listItem}>
-            <CalendarItem navigation={navigation} key={`item-${item.id}`} item={item} />
+        <View style={styles.listItem}>
+            <CalendarItem navigation={navigation} item={item} />
         </View>
     );
 
     const itemSeparator = () => {
-        return <View style={{height:2, backgroundColor:"#1F6702", marginTop:1}} />
+        return <View style={{ height: 2, backgroundColor: "#1F6702", marginTop: 1 }} />
     };
 
     return (
@@ -75,7 +75,7 @@ const FoodCalendar = (navigation) => {
                             <Text style={styles.empty_text}>Ei tietueita!</Text>
                         </View>
                         : null)}
-                        
+
                 />
 
             </View>

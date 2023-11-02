@@ -18,8 +18,10 @@ const styles = StyleSheet.create({
     shadowColor: "#CCCCCC",
     shadowRadius: 4,
   },
-  content: {
-
+  name: {
+    fontWeight:"bold",
+    fontSize:12,
+    
   },
   item_title: {
     justifyContent: "space-between",
@@ -36,7 +38,7 @@ const styles = StyleSheet.create({
     padding: 4,
     paddingTop:8,
     borderLeftColor: "#1F6702",
-    borderLeftWidth: 6
+    borderLeftWidth: 4
   },
   calrow: {
     paddingTop: 8,
@@ -56,7 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#98FF6F",
     padding: 4,
     borderLeftColor: "#1F6702",
-    borderLeftWidth: 6,
+    borderLeftWidth: 4,
     width: "100%",
   },
   foodrowExpanded: {
@@ -67,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#E6FCC3",
     padding: 4,
     borderLeftColor: "#1F6702",
-    borderLeftWidth: 6,
+    borderLeftWidth: 4,
     width: "100%",
   },
   calrowitem: {

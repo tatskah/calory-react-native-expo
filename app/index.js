@@ -17,20 +17,6 @@ const Index = () => {
     const Tab = createBottomTabNavigator();
     const HomeStack = createNativeStackNavigator();
 
-    // const tabNav = Tab.Navigator(router, {
-    //     hiddenTabs: ['FoodItemForm']
-    //     });
-
-    // function HomeStack(){
-    //     return (
-    //         <Stack.Navigator>
-    //             <Stack.Screen   name='FoodItemForm' component={FoodItemForm}></Stack.Screen> 
-
-    //         </Stack.Navigator>
-
-    //     );
-    // }
-
     useEffect(() => {
         var date = new Date().getDate(); //Current Date
         var month = new Date().getMonth() + 1; //Current Month
@@ -47,7 +33,7 @@ const Index = () => {
         <View style={{ flex: 1, backgroundColor: "#DDD" }}>
             <Stack.Screen options={{
                 headerTitle: "KALORI",
-                height: 20,
+                // height: 40,
             }}
             />
 

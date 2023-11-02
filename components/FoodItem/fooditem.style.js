@@ -1,10 +1,10 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-between",
-        alignItems: "baseline",
+        // justifyContent: "space-between",
+        // alignItems: "stretch",
         flexDirection: "column",
         padding: 4,
         marginLeft: 0,
@@ -16,11 +16,12 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         shadowColor: "#CCCCCC",
         shadowRadius: 4,
+        width:"100%"
     },
     containerFavorite: {
         flex: 1,
-        justifyContent: "space-between",
-        alignItems: "baseline",
+        // justifyContent: "space-between",
+        // alignItems: "stretch",
         flexDirection: "column",
         padding: 4,
         marginLeft: 0,
@@ -32,23 +33,24 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         borderLeftWidth:8,
         borderLeftColor:"#FF5733",
-        
         shadowColor: "#CCCCCC",
         shadowRadius: 4,
+        width:"100%"
     },
     name: {
         flex: 1,
         fontWeight: "bold"
     },
     calrow: {
-        paddingTop: 8,
         flex: 1,
-        justifyContent: "space-between",
+        paddingTop: 8,
+        // justifyContent: "space-around",
         flexDirection: "row",
+        width:"100%"
     },
     calrowitem: {
-        flex: 1,
-        minWidth: 110,
+        // flex: 1,
+        // minWidth: 110,
 
     },
     separator: {

@@ -19,12 +19,12 @@ const FoodItems = ({ navigation }) => {
     const [isLoading, setIsLoading] = useState('');
     const Stack = createStackNavigator();
 
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-            getData();
-        });
-        return unsubscribe;
-    }, []);
+    // useEffect(() => {
+    //     const unsubscribe = navigation.addListener('focus', () => {
+    //         getData();
+    //     });
+    //     return unsubscribe;
+    // }, []);
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
