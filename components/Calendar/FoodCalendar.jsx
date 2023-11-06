@@ -6,7 +6,7 @@ import CalendarItem from '../CalendarItem/CalendarItem';
 import styles from './foodcalendar.style';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-const FoodCalendar = (navigation) => {
+const FoodCalendar = ({navigation}) => {
     const [foodCalendarData, setFoodCalendarData] = useState([]);
     const [foodData, setFoodData] = useState({
         add_date: null,
@@ -29,6 +29,7 @@ const FoodCalendar = (navigation) => {
         try {
             const resp = await FoodCalendarService.getFoodCalendarItems();
             setFoodCalendarData(resp.data);
+            // console.log(resp)
             // setIsLoading(false);
         } catch (error) {
             // setError(error);

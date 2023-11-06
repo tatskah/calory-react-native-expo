@@ -1,14 +1,14 @@
-import { View, Image, } from "react-native";
+import { View, Image, useWindowDimensions } from "react-native";
 import { useState, useEffect } from "react";
 import { Stack, useRouter, useNavigation } from "expo-router";
-import { FoodCalendar, FoodItems, Report, HomeGraph, FoodItemForm, Settings } from '../components';
+import { FoodCalendar, FoodItems, Report, HomeGraph, FoodItemForm, Settings, CalendarItemForm } from '../components';
 import { icons } from '../constants';
 import styles from '../styles';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-
+import { TabView, SceneMap } from 'react-native-tab-view';
 
 const Index = () => {
     const [currentDate, setCurrentDate] = useState('');
@@ -16,6 +16,26 @@ const Index = () => {
     const navigation = useNavigation();
     const Tab = createBottomTabNavigator();
     const HomeStack = createNativeStackNavigator();
+
+    const layout = useWindowDimensions();
+    const [index, setIndex] = useState(0);
+    const [routes] = useState([
+        { key: 'first', title: 'First' },
+        { key: 'second', title: 'Second' },
+    ]);
+
+    const FirstRoute = () => (
+        <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
+    );
+
+    const SecondRoute = () => (
+        <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+    );
+
+    const renderScene = SceneMap({
+        first: FirstRoute,
+        second: SecondRoute,
+    });
 
     useEffect(() => {
         var date = new Date().getDate(); //Current Date
@@ -36,6 +56,13 @@ const Index = () => {
                 // height: 40,
             }}
             />
+
+            {/* <TabView
+                navigationState={{ index, routes }}
+                renderScene={renderScene}
+                onIndexChange={setIndex}
+                initialLayout={{ width: layout.width }}
+            /> */}
 
             <NavigationContainer independent={true}>
                 <Tab.Navigator
@@ -81,15 +108,23 @@ const Index = () => {
                             )
                         }}
                     />
-                    <Tab.Screen name='FoodItemForm' component={FoodItemForm} 
+                    <Tab.Screen name='FoodItemForm' component={FoodItemForm}
                         options={{
                             tabBarButton: () => null,
-                            tabBarVisible:false,
+                            tabBarVisible: false,
                             tabBarIcon: ({ color, size }) => (
                                 <Image source={icons.report} style={styles.toolbar_bottom_icon} />
                             )
                         }}
-
+                    />
+                    <Tab.Screen name='CalendarItemForm' component={CalendarItemForm}
+                        options={{
+                            tabBarButton: () => null,
+                            tabBarVisible: false,
+                            tabBarIcon: ({ color, size }) => (
+                                <Image source={icons.report} style={styles.toolbar_bottom_icon} />
+                            )
+                        }}
                     />
                     <Tab.Screen name='Report' component={Report}
                         options={{

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import styles from './settingsform.styles';
 import SettingsService from "../../services/settings.service";
 import { TextInput } from "react-native-paper";
@@ -64,19 +64,19 @@ const SettingsForm = ({ navigation }) => {
 
 
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity
+                    <Pressable
                         style={styles.buttonRed}
                         onPress={() => navigation.navigate('Home')}
                     >
                         <Text style={styles.buttonText}>Sulje</Text>
-                    </TouchableOpacity>
+                    </Pressable>
 
-                    <TouchableOpacity
+                    <Pressable
                         style={styles.buttonGreen}
                         onPress={update}
                     >
                         <Text style={styles.buttonText}>Tallenna</Text>
-                    </TouchableOpacity>
+                    </Pressable>
 
                 </View>
 

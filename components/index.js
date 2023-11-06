@@ -6,7 +6,7 @@ import HomePage from "./HomePage/HomePage";
 import HomeGraph from "./HomeGraph/HomeGraph";
 import FoodItemForm from "./FoodItemForm/FoodItemForm";
 import Settings from "./Settings/SettingsForm";
-
+import CalendarItemForm from "./CalendarItemForm/CalendarItemForm";
 export {
   FoodCalendar,
   FoodItems,
@@ -16,5 +16,6 @@ export {
   HomeGraph,
   FoodItemForm,
   Settings,
+  CalendarItemForm,
   
 };

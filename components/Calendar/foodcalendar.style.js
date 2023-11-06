@@ -1,10 +1,11 @@
 import { StyleSheet } from "react-native";
+import {Dimensions} from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: "space-between",
-        // alignItems: "stretch",
+        alignItems: "stretch",
         flexDirection: "columns",
         padding: 4,
         paddingTop: 12,
@@ -34,9 +35,9 @@ const styles = StyleSheet.create({
     content: {
         flex: 1,
         padding: 0,
-        paddingTop: 40,
+        paddingTop: 44,
+        marginBottom: 54,
         flexDirection:"row",
-
     },
     empty_list_content: {
         flex: 1,

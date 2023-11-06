@@ -6,6 +6,9 @@ class FoodCalendarService {
         return http.get('/foodcalendar');
     }
 
+    getFoodCalendarItemById(id){
+        return http.get(`foodcalendar/${id}`);
+    }
 
 }
 export default new FoodCalendarService;

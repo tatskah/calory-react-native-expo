@@ -3,10 +3,13 @@ import {
     View,
     Text,
     Pressable,
+    Image,
+    TouchableOpacity
 } from "react-native";
 import moment from 'moment';
 import * as Progress from 'react-native-progress';
 import styles from "./calendaritem.style";
+import { icons } from '../../constants';
 
 
 const CalendarItem = ({ item, navigation }) => {
@@ -16,6 +19,11 @@ const CalendarItem = ({ item, navigation }) => {
     useEffect(() => {
 
     }, []);
+
+    const handleImageClick = () =>{
+
+        navigation.navigate("CalendarItemForm", { id: item.id });
+    } 
 
     return (
 
@@ -36,6 +44,9 @@ const CalendarItem = ({ item, navigation }) => {
                         unfilledColor="#20AF61"
                         borderColor="#1F6702"
                     />
+                    <TouchableOpacity onPress={handleImageClick}>
+                        <Image source={icons.edit} style={{ width: 24, height: 24, borderWidth: 1, borderRadius: 6, borderColor: "#1F6702" }} />
+                    </TouchableOpacity>
                 </View>
 
                 <View style={isExpanded ? styles.calrowExpanded : styles.calrow}>

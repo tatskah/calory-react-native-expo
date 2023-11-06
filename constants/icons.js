@@ -9,6 +9,7 @@ import food2 from '../assets/icons/food-2.png';
 import report from '../assets/icons/report.png';
 import search from '../assets/icons/search.png';
 import settings from '../assets/icons/settings.png';
+import edit from '../assets/icons/edit.png';
 
 export default {
     home,
@@ -22,5 +23,6 @@ export default {
     report,
     search,
     settings,
-    
+    edit,
+
 }

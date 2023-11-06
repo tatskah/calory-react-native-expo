@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   calrowitem: {
-    // minWidth: 110,
+    minWidth: 100,
   },
   foodrow_content: {
     flex: 1,
